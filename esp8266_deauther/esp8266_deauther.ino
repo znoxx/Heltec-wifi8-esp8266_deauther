@@ -57,6 +57,8 @@ void setup() {
     // for random generator
     randomSeed(os_random());
 
+    Heltec.begin(true /*DisplayEnable Enable*/, false /*Serial Enable -- will be started later*/);
+
     // start serial
     Serial.begin(115200);
     Serial.println();

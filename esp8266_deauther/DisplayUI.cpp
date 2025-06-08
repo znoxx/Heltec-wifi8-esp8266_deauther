@@ -7,41 +7,41 @@
 // ===== adjustable ===== //
 void DisplayUI::configInit() {
     // initialize display
-    display.init();
+    Heltec.display->init();
 
     /*
        In case of a compiler (conversion char/uint8_t) error,
        make sure to have version 4 of the display library installed
        https://github.com/ThingPulse/esp8266-oled-ssd1306/releases/tag/4.0.0
      */
-    display.setFont(DejaVu_Sans_Mono_12);
+    Heltec.display->setFont(DejaVu_Sans_Mono_8);
 
-    display.setContrast(255);
+    Heltec.display->setContrast(255);
 
-    if (FLIP_DIPLAY) display.flipScreenVertically();
+    if (FLIP_DIPLAY) Heltec.display->flipScreenVertically();
 
-    display.clear();
-    display.display();
+    Heltec.display->clear();
+    Heltec.display->display();
 }
 
 void DisplayUI::configOn() {
-    display.displayOn();
+    Heltec.display->displayOn();
 }
 
 void DisplayUI::configOff() {
-    display.displayOff();
+    Heltec.display->displayOff();
 }
 
 void DisplayUI::updatePrefix() {
-    display.clear();
+    Heltec.display->clear();
 }
 
 void DisplayUI::updateSuffix() {
-    display.display();
+    Heltec.display->display();
 }
 
 void DisplayUI::drawString(int x, int y, String str) {
-    display.drawString(x, y, replaceUtf8(str, String(QUESTIONMARK)));
+    Heltec.display->drawString(x, y, replaceUtf8(str, String(QUESTIONMARK)));
 }
 
 void DisplayUI::drawString(int row, String str) {
@@ -49,7 +49,7 @@ void DisplayUI::drawString(int row, String str) {
 }
 
 void DisplayUI::drawLine(int x1, int y1, int x2, int y2) {
-    display.drawLine(x1, y1, x2, y2);
+    Heltec.display->drawLine(x1, y1, x2, y2);
 }
 
 // ====================== //
@@ -445,13 +445,13 @@ void DisplayUI::setup() {
     createMenu(&clockMenu, &mainMenu, [this]() {
         addMenuNode(&clockMenu, D_CLOCK_DISPLAY, [this]() { // CLOCK
             mode = DISPLAY_MODE::CLOCK_DISPLAY;
-            display.setFont(ArialMT_Plain_24);
-            display.setTextAlignment(TEXT_ALIGN_CENTER);
+            Heltec.display->setFont(ArialMT_Plain_24);
+            Heltec.display->setTextAlignment(TEXT_ALIGN_CENTER);
         });
         addMenuNode(&clockMenu, D_CLOCK_SET, [this]() { // CLOCK SET TIME
             mode = DISPLAY_MODE::CLOCK;
-            display.setFont(ArialMT_Plain_24);
-            display.setTextAlignment(TEXT_ALIGN_CENTER);
+            Heltec.display->setFont(ArialMT_Plain_24);
+            Heltec.display->setTextAlignment(TEXT_ALIGN_CENTER);
         });
     });
 
@@ -612,8 +612,8 @@ void DisplayUI::setupButtons() {
                 case DISPLAY_MODE::CLOCK:
                 case DISPLAY_MODE::CLOCK_DISPLAY:
                     mode = DISPLAY_MODE::MENU;
-                    display.setFont(DejaVu_Sans_Mono_12);
-                    display.setTextAlignment(TEXT_ALIGN_LEFT);
+                    Heltec.display->setFont(DejaVu_Sans_Mono_8);
+                    Heltec.display->setTextAlignment(TEXT_ALIGN_LEFT);
                     break;
             }
         }
@@ -651,8 +651,8 @@ void DisplayUI::setupButtons() {
 
                 case DISPLAY_MODE::CLOCK:
                     mode = DISPLAY_MODE::MENU;
-                    display.setFont(DejaVu_Sans_Mono_12);
-                    display.setTextAlignment(TEXT_ALIGN_LEFT);
+                    Heltec.display->setFont(DejaVu_Sans_Mono_8);
+                    Heltec.display->setTextAlignment(TEXT_ALIGN_LEFT);
                     break;
             }
         }
@@ -731,14 +731,14 @@ void DisplayUI::drawButtonTest() {
 void DisplayUI::drawMenu() {
     String tmp;
     int    tmpLen;
-    int    row = (currentMenu->selected / 5) * 5;
+    int    row = (currentMenu->selected / 4) * 4;
 
     // correct selected if it's off
     if (currentMenu->selected < 0) currentMenu->selected = 0;
     else if (currentMenu->selected >= currentMenu->list->size()) currentMenu->selected = currentMenu->list->size() - 1;
 
     // draw menu entries
-    for (int i = row; i < currentMenu->list->size() && i < row + 5; i++) {
+    for (int i = row; i < currentMenu->list->size() && i < row + 4; i++) {
         tmp    = currentMenu->list->get(i).getStr();
         tmpLen = tmp.length();
 
@@ -756,7 +756,7 @@ void DisplayUI::drawMenu() {
         }
 
         tmp = (currentMenu->selected == i ? CURSOR : SPACE) + tmp;
-        drawString(0, (i - row) * 12, tmp);
+        drawString(0, (i - row) * 8, tmp);
     }
 }
 
@@ -824,7 +824,7 @@ void DisplayUI::drawClock() {
     if (clockMinute < 10) clockTime += '0';
     clockTime += String(clockMinute);
 
-    display.drawString(64, 20, clockTime);
+    Heltec.display->drawString(64, 5, clockTime);
 }
 
 void DisplayUI::drawResetting() {

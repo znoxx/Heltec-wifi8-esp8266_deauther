@@ -8,6 +8,14 @@
 
 #define DEFAULT_ESP8266
 
+#define BUTTON_UP 14
+#define BUTTON_DOWN 12
+#define BUTTON_A 13
+
+#define LED_DIGITAL
+#define LED_PIN_R 2     
+#define LED_PIN_B 15      
+
 // #define NODEMCU
 // #define WEMOS_D1_MINI
 // #define HACKHELD_VEGA
