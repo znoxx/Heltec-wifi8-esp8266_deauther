@@ -9,7 +9,7 @@
 #include "Scan.h"
 #include "Attack.h"
 
-#include "src/Heltec_ESP8266-1.0.3/heltec.h"
+#include "src/Heltec_ESP8266-1.0.3_patched/heltec.h"
 
 
 #ifdef RTC_DS3231
