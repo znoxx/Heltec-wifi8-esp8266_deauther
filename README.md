@@ -65,13 +65,13 @@ Further setup instructions can be found in original readme or use online manual 
 
 ## Useful stuff
 
-Fancy 3D-printed enclosure can be found here: https://www.thingiverse.com/thing:3510594
+Fancy 3D-printed enclosure can be found here: https://www.thingiverse.com/t hing:3510594
 
 There is also an option to connect LiPo battery for your Heltec Wifi8 Kit. Not sure about the usefullness of this modification, but one will need extra power switch to turn off battery power.
 
 Any modern and not-so-modern power bank will do the job, but if you are feeling adventurous, you can try to use this enclosure: https://www.thingiverse.com/thing:3738494
 
-## More to come
+## Assembled version
+![Assembled](img/Assembled_heltec.jpg)
 
-My current Wifi 8 kit has broken screen, so in case I will get a new one -- I will update this readme with some photos of real device.
-
+Assembled version above. Minimal detachable control "board".
